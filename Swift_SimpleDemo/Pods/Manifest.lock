@@ -5,17 +5,22 @@ PODS:
     - ObjectMapper (~> 2.0)
   - Kingfisher (3.10.2)
   - ObjectMapper (2.2.7)
+  - RTRootNavigationController (0.6.6):
+    - RTRootNavigationController/Core (= 0.6.6)
+  - RTRootNavigationController/Core (0.6.6)
 
 DEPENDENCIES:
   - AlamofireObjectMapper (~> 4.0)
   - Kingfisher
+  - RTRootNavigationController
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   AlamofireObjectMapper: 435adc82f5b367679bd9e71c4974a54efd0b2521
   Kingfisher: 7297492bf8cec9b2e2dee3519f2219948580d98e
   ObjectMapper: 65abcfd9a61cf7396cbd14a4fb22fddfcc46577e
+  RTRootNavigationController: 1429554f853e8319a383849befed73d5dc58a108
 
-PODFILE CHECKSUM: 4582329b66ea1bf044df9d5edf47907381a7dd83
+PODFILE CHECKSUM: 8bc393b4378a3fdcc1585a2b69745120840efa3e
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.4.0
