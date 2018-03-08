@@ -10,55 +10,27 @@ import UIKit
 import AlamofireObjectMapper
 import Alamofire
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-    @IBOutlet weak var tableView: UITableView!
-    
-    fileprivate lazy var goodses = [Goods]()
-    
-    
+class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        tableView.tableFooterView = UIView()
-        loadData()
+        webRequst()
+        
     }
     
-    fileprivate func loadData() {
+    func webRequst()  {
         
-        let url = "http://192.168.2.162:6060/User?action=getUserDeviceList"
-        let par = [ "action" : "getUserDeviceList",
-                    "userId" : "36ca73b18fa64e0cb93a02fbf2a29a65",
-                    "page" : "1",
-                    "pageSzie" : "10"]
-        
-        
-        Alamofire.request(url, method: .post, parameters: par, encoding: JSONEncoding.default, headers: nil).responseArray(keyPath: "obj.list") { (response: DataResponse<[Goods]>) in
+        let url = "https://httpbin.org/get"
+        //注意返回的类型为<Mappable对象,NSError>
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseObject { (response: DataResponse<MyResponse>) in
             
-            if let values = response.result.value{
-                self.goodses = values
-                self.tableView.reloadData()
-                for goods in values {
-                    print(goods.name!)
+            if let myResponse = response.result.value{
+                print(myResponse.url!)
+                if let header = myResponse.headers{
+                    print(header.userAgent!)
                 }
             }
-            
-            
         }
-        
-       
-    }
-    
-    // MARK: - UITableViewDelegate UITableViewDataSource
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return goodses.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath) as! GoodsCell
-        cell.goods = goodses[indexPath.row]
-        return cell
     }
     
     
