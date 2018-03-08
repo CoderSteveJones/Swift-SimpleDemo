@@ -22,15 +22,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         tableView.tableFooterView = UIView()
-//        loadData()
+        loadData()
     }
     
     fileprivate func loadData() {
         
-        let url = "http://139.196.36.167:8084/h5Server/v1/Shop/getMerchants"
-        let par = [ "merchantProperty" : "1",
+        let url = "http://192.168.2.162:6060/User?action=getUserDeviceList"
+        let par = [ "action" : "getUserDeviceList",
+                    "userId" : "36ca73b18fa64e0cb93a02fbf2a29a65",
                     "page" : "1",
-                    "rows" : "10"]
+                    "pageSzie" : "10"]
         
         
         Alamofire.request(url, method: .post, parameters: par, encoding: JSONEncoding.default, headers: nil).responseArray(keyPath: "obj.list") { (response: DataResponse<[Goods]>) in
