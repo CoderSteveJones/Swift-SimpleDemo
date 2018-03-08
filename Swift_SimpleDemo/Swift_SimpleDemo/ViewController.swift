@@ -14,9 +14,36 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        webRequst()
+        // 1.
+//        webRequst()
+
+        // 2.
+        loadData()
+        
+    
         
     }
+    
+    func loadData() {
+        let par = ["action" : "getUserDeviceList",
+                   "userId" : "36ca73b18fa64e0cb93a02fbf2a29a65",
+                   "page" : "1",
+                   "pageSzie" : "5",
+                   ]
+        
+        let url = "http://192.168.2.162:6060/User?action=getUserDeviceList"
+        
+//        Alamofire.request(url, method: .post, parameters: par, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+//            let result = response.result.value as! [String : Any]
+//            print(result)
+//        }
+        
+        Alamofire.request(url, method: .post, parameters: par, encoding: JSONEncoding.default, headers: nil).responseString { (response) in
+            let result = response.result.value!
+            print(result)
+        }
+    }
+    
     
     func webRequst()  {
         
