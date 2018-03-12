@@ -25,6 +25,7 @@ class ViewController: UIViewController {
     }
     
     func loadData() {
+        
         let par = ["action" : "getUserDeviceList",
                    "userId" : "36ca73b18fa64e0cb93a02fbf2a29a65",
                    "page" : "1",
@@ -33,15 +34,17 @@ class ViewController: UIViewController {
         
         let url = "http://192.168.2.162:6060/User?action=getUserDeviceList"
         
-//        Alamofire.request(url, method: .post, parameters: par, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-//            let result = response.result.value as! [String : Any]
-//            print(result)
-//        }
         
-        Alamofire.request(url, method: .post, parameters: par, encoding: JSONEncoding.default, headers: nil).responseString { (response) in
-            let result = response.result.value!
-            print(result)
+        Alamofire.request(url, method: .post, parameters: par, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            let value = response.result.value as! [String : Any]
+            print(value)
         }
+        
+        Alamofire.request(url, method: .post, parameters: par, encoding: URLEncoding.httpBody, headers: nil).responseJSON { (response) in
+            let value = response.result.value as! [String : Any]
+            print(value)
+        }
+        
     }
     
     
